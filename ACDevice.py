@@ -39,7 +39,7 @@ class AC_Device():
 
     # calling registration method to register the device
     def _register_device(self, device_id, room_type, device_type):
-        print("Register for AC device called")
+        print("DEVICE : Register for AC device called")
         data = self._get_header()
         data["Request_Type"] = "Register"
         data_out = json.dumps(data)
@@ -61,16 +61,16 @@ class AC_Device():
         if "Registration_Status" in data_in :
             self._device_registration_flag = data_in["Registration_Status"]
             if self._device_registration_flag :
-                "AC-DEVICE is registered. Registration status for {0} is TRUE".format(self._device_id)
+                print("DEVICE : AC-DEVICE is registered. Registration status for {0} is TRUE".format(self._device_id))
             else:
-                "AC-DEVICE did not register. Registration status for {0} is FALSE".format(self._device_id)
+                print("DEVICE : AC-DEVICE did not register. Registration status for {0} is FALSE".format(self._device_id))
         elif "Status" in data_in :
             if data_in["Status"] == "SET" :
                 self._set_switch_status(data_in["Status"])
                 self._set_temperature(data_in["Temperature"])
-                print("Status for AC-DEVICE with id {} for room {} is set to following value".format(self._device_id,self._room_type))
-                print("Switch status : {}".format(self._get_switch_status()))
-                print("Temperature : {}".format(self._get_temperature()))
+                print("DEVICE : Status for AC-DEVICE with id {} for room {} is set to following value".format(self._device_id,self._room_type))
+                print("DEVICE : Switch status : {}".format(self._get_switch_status()))
+                print("DEVICE : Temperature : {}".format(self._get_temperature()))
             elif data_in["Status"] == "GET" :
                 data = self._get_header()
                 data["Request_Type"] = "Status"

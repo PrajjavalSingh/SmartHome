@@ -28,21 +28,21 @@ class Edge_Server:
     # Connect method to subscribe to various topics.     
     def _on_connect(self, client, userdata, flags, result_code):
         if result_code == 0 :
-            print("Connection successful")
+            print("EdgeServer : Connection successful")
             self.client.subscribe(("D2E/LIGHT/#",2))
             self.client.subscribe(("D2E/AC/#",2))
         elif result_code == 1 :
-            print("Connection refused – incorrect protocol version")
+            print("EdgeServer : Connection refused – incorrect protocol version")
         elif result_code == 2 :
-            print("Connection refused – invalid client identifier")
+            print("EdgeServer : Connection refused – invalid client identifier")
         elif result_code == 3 :
-            print("Connection refused – server unavailable")        
+            print("EdgeServer : Connection refused – server unavailable")        
         elif result_code == 4 :
-            print("Connection refused – bad username or password")
+            print("EdgeServer : Connection refused – bad username or password")
         elif result_code == 5 :
-            print("Connection refused – not authorised")
+            print("EdgeServer : Connection refused – not authorised")
         else :
-            print("Currently unused")
+            print("EdgeServer : Currently unused")
 
     # method to process the recieved messages and publish them on relevant topics 
     # this method can also be used to take the action based on received commands
@@ -59,7 +59,7 @@ class Edge_Server:
             dvcdata["Room_Type"] = room_type
             dvcdata["Device_Type"] = device_type
             self._registered_device_data[device_id] = dvcdata
-            print("Registration for {} device in {} successful, Device ID : {}".format(device_type,room_type,device_id))
+            print("EdgeServer : Registration for {} device in {} successful, Device ID : {}".format(device_type,room_type,device_id))
             data["Registration_Status"] = True
             data_out = json.dumps(data)
             self.client.publish(self._get_id(device_type,room_type,device_id),data_out,2)
@@ -67,10 +67,10 @@ class Edge_Server:
             status = data_in["Status"]
             if device_type == "AC" :
                 temperature = data_in["Temperature"]
-                print("Status for AC device in {}, Device ID : {}, Status : {}, Temperature : {}".format(room_type,device_id,status,temperature))
+                print("EdgeServer : Status for AC device in {}, Device ID : {}, Status : {}, Temperature : {}".format(room_type,device_id,status,temperature))
             else:
                 intensity = data_in["Intensity"]
-                print("Status for LIGHT device in {}, Device ID : {}, Status : {}, Intensity : {}".format(room_type,device_id,status,intensity))
+                print("EdgeServer : Status for LIGHT device in {}, Device ID : {}, Status : {}, Intensity : {}".format(room_type,device_id,status,intensity))
     
     # Returning the current registered list
     def get_registered_device_list(self):
@@ -90,7 +90,7 @@ class Edge_Server:
         data["Status"] = "GET"
         data_out = json.dumps(data)
         device_type, room_type = self._get_Data_For_DvcID(device_id)
-        print("Getting status for {0} for device type {1} for room {2}".format(device_id,device_type,room_type))
+        print("EdgeServer : Getting status for {0} for device type {1} for room {2}".format(device_id,device_type,room_type))
         self.client.publish(self._get_id(device_type,room_type,device_id),data_out,2)
         time.sleep(WAIT_TIME)
         print("\n")
@@ -115,5 +115,5 @@ class Edge_Server:
         data["Status"] = "SET"
         data_out = json.dumps(data)
         device_type, room_type = self._get_Data_For_DvcID(device_id)
-        print("Setting status for {0} for device type {1} for room {2}".format(device_id,device_type,room_type))
+        print("EdgeServer : Setting status for {0} for device type {1} for room {2}".format(device_id,device_type,room_type))
         self.client.publish(self._get_id(device_type,room_type,device_id),data_out,2)

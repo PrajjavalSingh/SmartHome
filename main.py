@@ -24,6 +24,7 @@ time.sleep(WAIT_TIME)
 light_device_4 = Light_Device("light_4", "Living")
 time.sleep(WAIT_TIME)
 
+#ID list for LIGHT
 light_device_ids.append("light_1")
 light_device_ids.append("light_2")
 light_device_ids.append("light_3")
@@ -39,9 +40,17 @@ time.sleep(WAIT_TIME)
 ac_device_3 = AC_Device("ac_3", "Living")
 time.sleep(WAIT_TIME)  
 
+#ID list for AC
 ac_device_ids.append("ac_1")
 ac_device_ids.append("ac_2")
 ac_device_ids.append("ac_3")
+
+#ID list for Rooms
+room_ids = []
+room_ids.append("Living")
+room_ids.append("BR1")
+room_ids.append("BR2")
+room_ids.append("Kitchen")
 
 #Getting status of all the LIGHT devices
 print("Getting status of all LIGHT devices")
@@ -61,11 +70,12 @@ edge_server_1.get_Device_App_Status("AC")
 
 print("Getting status of LIGHT devices")
 edge_server_1.get_Device_App_Status("LIGHT")
-#Change status of LIGHT device
-#print("Getting status of all LIGHT devices")
 
-#for light_device_id in light_device_ids :
+#Getting status by room type
+print("Getting status by room type")
 
+for room_id in room_ids :
+    edge_server_1.get_Room_App_Status(room_id)
 
 print("\nSmart Home Simulation stopped.")
 edge_server_1.terminate()

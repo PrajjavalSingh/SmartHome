@@ -59,16 +59,16 @@ class Light_Device():
         if "Registration_Status" in data_in :
             self._device_registration_flag = data_in["Registration_Status"]
             if self._device_registration_flag :
-                "LIGHT-DEVICE is registered. Registration status for {0} is TRUE".format(self._device_id)
+                print("DEVICE : LIGHT-DEVICE is registered. Registration status for {0} is TRUE".format(self._device_id))
             else:
-                "LIGHT-DEVICE did not register. Registration status for {0} is FALSE".format(self._device_id)
+                print("DEVICE : LIGHT-DEVICE did not register. Registration status for {0} is FALSE".format(self._device_id))
         elif "Status" in data_in :
             if data_in["Status"] == "SET" :
                 self._set_switch_status(data_in["Status"])
                 self._set_light_intensity(data_in["Intensity"])
-                print("Status for LIGHT-DEVICE with id {} for room {} is set to following value".format(self._device_id,self._room_type))
-                print("Switch status : {}".format(self._get_switch_status()))
-                print("Intensity : {}".format(self._get_light_intensity()))
+                print("DEVICE : Status for LIGHT-DEVICE with id {} for room {} is set to following value".format(self._device_id,self._room_type))
+                print("DEVICE : Switch status : {}".format(self._get_switch_status()))
+                print("DEVICE : Intensity : {}".format(self._get_light_intensity()))
             elif data_in["Status"] == "GET" :
                 data = self._get_header()
                 data["Request_Type"] = "Status"
@@ -90,7 +90,7 @@ class Light_Device():
         elif switch_state == offstr.lower() or switch_state == offstr.upper :
             self._switch_status = offstr
         else:
-            print("Faulty status value, status value not changed")
+            print("DEVICE : Faulty status value, status value not changed")
 
     # Getting the light intensity for the devices
     def _get_light_intensity(self):
