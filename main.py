@@ -12,8 +12,8 @@ edge_server_1 = Edge_Server('edge_server_1')
 time.sleep(WAIT_TIME)  
 
 # Creating the light_device
-print("Intitate the device creation and registration process." )
-print("\nCreating the Light devices for their respective rooms.")
+print("********************Intitate the device creation and registration process.********************" )
+print("##########Creating the Light devices for their respective rooms.##########")
 light_device_ids = []
 light_device_1 = Light_Device("light_1", "Kitchen")
 time.sleep(WAIT_TIME)
@@ -29,9 +29,10 @@ light_device_ids.append("light_1")
 light_device_ids.append("light_2")
 light_device_ids.append("light_3")
 light_device_ids.append("light_4")
+print("----------------------------------------------------------------------\n")
 
 # Creating the ac_device  
-print("\nCreating the AC devices for their respective rooms. ")
+print("##########Creating the AC devices for their respective rooms.##########")
 ac_device_ids = []
 ac_device_1 = AC_Device("ac_1", "BR1")
 time.sleep(WAIT_TIME)  
@@ -39,6 +40,7 @@ ac_device_2 = AC_Device("ac_2", "BR2")
 time.sleep(WAIT_TIME)  
 ac_device_3 = AC_Device("ac_3", "Living")
 time.sleep(WAIT_TIME)  
+print("********************************************************************************\n\n")
 
 #ID list for AC
 ac_device_ids.append("ac_1")
@@ -52,30 +54,44 @@ room_ids.append("BR1")
 room_ids.append("BR2")
 room_ids.append("Kitchen")
 
+print("********************Getting Current Status by Devices********************")
+
 #Getting status of all the LIGHT devices
-print("Getting status of all LIGHT devices")
+print("##########Getting status of all LIGHT devices##########")
 for light_device_id in light_device_ids :
     edge_server_1.get_status( light_device_id )
 
+print("----------------------------------------------------------------------\n")
+
 #Getting status of all the AC devices
-print("Getting status of all AC devices")
+print("##########Getting status of all AC devices##########")
 for ac_device_id in ac_device_ids :
     edge_server_1.get_status( ac_device_id )
 
-#Getting status by device type
-print("Getting status by device type")
+print("********************************************************************************\n\n")
 
-print("Getting status of AC devices")
+#Getting status by device type
+print("********************Getting Status by Device Type********************")
+
+print("##########Getting status of AC devices##########")
 edge_server_1.get_Device_App_Status("AC")
 
-print("Getting status of LIGHT devices")
+print("----------------------------------------------------------------------\n")
+
+print("##########Getting status of LIGHT devices##########")
 edge_server_1.get_Device_App_Status("LIGHT")
 
 #Getting status by room type
-print("Getting status by room type")
+print("********************Getting Status by Room Type********************")
 
 for room_id in room_ids :
     edge_server_1.get_Room_App_Status(room_id)
 
+print("********************************************************************************\n\n")
+
+#Changing the status and value, i.e. Temperature or Intensity of Devices
+print("********************Changing Status of Devices********************")
+#put code here
+print("********************************************************************************\n\n")
 print("\nSmart Home Simulation stopped.")
 edge_server_1.terminate()
