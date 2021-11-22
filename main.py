@@ -93,7 +93,7 @@ print("##########Getting status of LIGHT devices##########\n")
 print("********************Changing Status of Devices********************\n\n")
 print("##########Changing status of LIGHT devices##########\n")
 data_in_LIGHT = {}
-data_in_LIGHT["Status"] = "ON"
+data_in_LIGHT["Device_Status"] = "ON"
 data_in_LIGHT["Intensity"] = 0
 edge_server_1.set("light_1",json.dumps(data_in_LIGHT))
 data_in_LIGHT["Intensity"] = 1
@@ -105,7 +105,7 @@ edge_server_1.set("light_4",json.dumps(data_in_LIGHT))
 
 print("##########Changing status of AC devices##########\n")
 data_in_AC = {}
-data_in_AC["Status"] = "ON"
+data_in_AC["Device_Status"] = "ON"
 data_in_AC["Temperature"] = 20
 edge_server_1.set("ac_1",json.dumps(data_in_AC))
 data_in_AC["Temperature"] = 21

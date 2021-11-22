@@ -64,7 +64,7 @@ class Light_Device():
                 print("DEVICE : LIGHT-DEVICE did not register. Registration status for {0} is FALSE".format(self._device_id))
         elif "Status" in data_in :
             if data_in["Status"] == "SET" :
-                self._set_switch_status(data_in["Status"])
+                self._set_switch_status(data_in["Device_Status"])
                 self._set_light_intensity(data_in["Intensity"])
                 print("DEVICE : Status for LIGHT-DEVICE with id {} for room {} is set to following value".format(self._device_id,self._room_type))
                 print("DEVICE : Switch status : {}".format(self._get_switch_status()))
@@ -85,9 +85,9 @@ class Light_Device():
     def _set_switch_status(self, switch_state):
         onstr = "ON"
         offstr = "OFF"
-        if switch_state == onstr.lower() or switch_state == onstr.upper :
+        if switch_state == onstr.lower() or switch_state == onstr.upper() :
             self._switch_status = onstr
-        elif switch_state == offstr.lower() or switch_state == offstr.upper :
+        elif switch_state == offstr.lower() or switch_state == offstr.upper() :
             self._switch_status = offstr
         else:
             print("DEVICE : Faulty status value, status value not changed")
