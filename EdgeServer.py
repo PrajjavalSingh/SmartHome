@@ -117,3 +117,4 @@ class Edge_Server:
         device_type, room_type = self._get_Data_For_DvcID(device_id)
         print("EdgeServer : Setting status for {0} for device type {1} for room {2}".format(device_id,device_type,room_type))
         self.client.publish(self._get_id(device_type,room_type,device_id),data_out,2)
+        time.sleep(WAIT_TIME)
